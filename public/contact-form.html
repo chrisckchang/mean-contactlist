@@ -1,0 +1,41 @@
+<div class="row" ng-hide="contact._id">
+  <div class="col-md-6">
+      <h2>Create new contact</h2>
+  </div>
+</div>
+<div class="container">
+  <div>
+    <p>
+      <label>First Name</label> 
+      <input id="name" class="form-control" type="text" ng-model="contact.firstName"> 
+    </p>
+    <p>
+      <label>Last Name</label> 
+      <input id="name" class="form-control" type="text" ng-model="contact.lastName"> 
+    </p>
+    <p>
+      <label>Email</label> 
+      <input id="name" class="form-control" type="text" ng-model="contact.email"> 
+    </p>
+    <p>
+      <label>Phone (Mobile)</label> 
+      <input id="name" class="form-control" type="text" ng-model="contact.phone.mobile"> 
+    </p>
+    <p>
+      <label>Phone (Work)</label> 
+      <input id="name" class="form-control" type="text" ng-model="contact.phone.work"> 
+    </p>
+    <p>
+      <label>Address</label> 
+      <input id="name" class="form-control" type="text" ng-model="contact.address"> 
+    </p>
+    <p>
+      <label>Twitter Handle</label> 
+      <input id="name" class="form-control" type="text" ng-model="contact.twitter"> 
+    </p>
+    <p>
+      <button style="margin-top:20px" class="btn btn-default" ng-click="saveContact(contact)">Save</button>
+      <button style="margin-top:20px" class="btn btn-default" ng-click="back()">Back</button>
+    </p>
+  </div>
+</div>
