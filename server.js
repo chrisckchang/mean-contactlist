@@ -25,12 +25,12 @@ mongodb.MongoClient.connect(process.env.MONGOLAB_URI, function (err, database) {
   });
 });
 
+// ****************************** CONTACTS API ROUTES ******************************************
+
 // Generic error handler used by all endpoints.
 function handleError(code, e, res, message) {
   res.status(500).json({"error": message, "reason": e.message || "unknown"});
 }
-
-// ****************************** CONTACTS CRUD ROUTES ******************************************
 
 /*  "/contacts"
  *    GET: grabs all contacts
@@ -53,6 +53,10 @@ app.post("/contacts", function(req, res) {
 
   if (req.body.firstName === undefined || req.body.lastName === undefined) {
     handleError(null, res, "Must provide a contact name.");
+  }
+
+  if (req.body.email === undefined) {
+    handleError(null, res, "Must provide an email.");
   }
 
   db.collection("contacts").insertOne(newDoc, function(err, doc) {
