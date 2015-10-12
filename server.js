@@ -33,8 +33,6 @@ mongodb.MongoClient.connect(process.env.MONGOLAB_URI, function (err, database) {
 
 // Generic error handler used by all endpoints.
 
-// reason = mongo response
-// message = message to user
 function handleError(reason, message, code) {
   console.log("ERROR: " + reason);
   res.status(code || 500).json({"error": message});
@@ -60,13 +58,11 @@ app.post("/contacts", function(req, res) {
   newContact.createDate = new Date();
 
   if (!(req.body.firstName || req.body.lastName)) {
-    // XXX no reason, 400?
-    handleError("Invalid user input", "Must provide a first or last name.");
+    handleError("Invalid user input", "Must provide a first or last name.", 400);
   }
 
   db.collection(CONTACTS_COLLECTION).insertOne(newContact, function(err, doc) {
     if (err) {
-      // XXX
       handleError(err.message, "Failed to create new contact.");
     } else {
       res.status(201).json(doc.ops[0]);
@@ -83,8 +79,6 @@ app.post("/contacts", function(req, res) {
 app.get("/contacts/:id", function(req, res) {
   db.collection(CONTACTS_COLLECTION).findOne({ _id: new ObjectId(req.params.id) }, function(err, doc) {
     if (err) {
-      // XXX
-      console.log(err);
       handleError(err.message, "Failed to get contact");
     } else {
       res.status(200).json(doc);  
@@ -103,7 +97,6 @@ app.put("/contacts/:id", function(req, res) {
   db.collection(CONTACTS_COLLECTION).updateOne({_id: new ObjectId(req.params.id)}, updateDoc, 
     function(err, doc) {
       if (err) {
-        // XXX
         handleError(err.message, "Failed to update contact");
       } else {
         res.status(204).end();
@@ -114,7 +107,6 @@ app.put("/contacts/:id", function(req, res) {
 app.delete("/contacts/:id", function(req, res) {
   db.collection(CONTACTS_COLLECTION).deleteOne({_id: new ObjectId(req.params.id)}, function(err, result) {
     if (err) {
-      // XXX
       handleError(err.message, "Failed to delete contact");
     } else {
       res.status(204).end();
