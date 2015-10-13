@@ -26,29 +26,23 @@ angular.module("contactsApp", ['ngRoute'])
         this.getContacts = function() {
             return $http.get("/contacts").
                 then(function(response) {
-                    // XXX - success
-                    return response;
                 }, function(response) {
-                    alert("Error retrieving contacts.");
+                    alert("Error finding contacts.");
                 });
         }
         this.createContact = function(contact) {
             return $http.post("/contacts", contact).
                 then(function(response) {
-                    // XXX
-                    return response;
                 }, function(response) {
-                    alert("Error adding this contact.");
+                    alert("Error creating contact.");
                 });
         }
         this.getContact = function(contactId) {
             var url = "/contacts/" + contactId;
             return $http.get(url).
                 then(function(response) {
-                    // XXX
-                    return response;
                 }, function(response) {
-                    alert("Error retrieving this contact.");
+                    alert("Error finding this contact.");
                 });
         }
         this.editContact = function(contact) {
@@ -57,6 +51,7 @@ angular.module("contactsApp", ['ngRoute'])
             return $http.put(url, contact).
                 then(function(response) {
                 }, function(response) {
+                    alert("Error editing this contact.");
                     console.log(response);
                 });
         }
@@ -65,6 +60,7 @@ angular.module("contactsApp", ['ngRoute'])
             return $http.delete(url).
                 then(function(response) {
                 }, function(response) {
+                    alert("Error deleting this contact.");
                     console.log(response);
                 });
         }

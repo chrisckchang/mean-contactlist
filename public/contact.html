@@ -14,7 +14,7 @@
 </div>
 <div ng-hide="editMode" class="container">
   <div>
-    <p>email: <a ng-href="mailto:{{ contact.email }}" target="_blank">{{ contact.email }}</a></p>
+    <p ng-if="contact.email">email: <a ng-href="mailto:{{ contact.email }}" target="_blank">{{ contact.email }}</a></p>
     <p ng-if="contact.phone.mobile">phone (m): {{ contact.phone.mobile }} </p>
     <p ng-if="contact.phone.work">phone (w): {{ contact.phone.work }} </p>
     <p ng-if="contact.address"> address: {{ contact.address }} </p>

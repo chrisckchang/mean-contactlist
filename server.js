@@ -2,23 +2,25 @@ var express = require("express");
 var path = require("path");
 var bodyParser = require("body-parser");
 var mongodb = require("mongodb");
-var ObjectID = require("mongodb").ObjectID;
+var ObjectID = mongodb.ObjectID;
 
 var CONTACTS_COLLECTION = "contacts";
 
 var app = express();
 app.use(express.static(__dirname + "/public"));
-app.use(bodyParser.json()); // for parsing application/json
+app.use(bodyParser.json());
 
-// Initialize the database before starting the application server.
+// Create a database variable outside of the database connection callback to reuse the connection pool in your app.
 var db;
+
+// Connect to the database before starting the application server. 
 mongodb.MongoClient.connect(process.env.MONGOLAB_URI, function (err, database) {
   if (err) {
     console.log(err);
     process.exit(1);
   }
 
-  // Save database object for reuse.
+  // Save database object from the callback for reuse.
   db = database;
   console.log("Database connection ready");
 
@@ -29,7 +31,7 @@ mongodb.MongoClient.connect(process.env.MONGOLAB_URI, function (err, database) {
   });
 });
 
-// ****************************** CONTACTS API ROUTES ******************************************
+// ***************************************** CONTACTS API ROUTES *****************************************
 
 // Generic error handler used by all endpoints.
 function handleError(reason, message, code) {
