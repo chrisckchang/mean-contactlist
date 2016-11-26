@@ -13,8 +13,8 @@ app.use(bodyParser.json());
 // Create a database variable outside of the database connection callback to reuse the connection pool in your app.
 var db;
 
-// Connect to the database before starting the application server. 
-mongodb.MongoClient.connect(process.env.MONGODB_URI, function (err, database) {
+// Connect to the database before starting the application server.
+mongodb.MongoClient.connect('mongodb://localhost:27017/contacts', function (err, database) {
   if (err) {
     console.log(err);
     process.exit(1);
@@ -49,7 +49,7 @@ app.get("/contacts", function(req, res) {
     if (err) {
       handleError(res, err.message, "Failed to get contacts.");
     } else {
-      res.status(200).json(docs);  
+      res.status(200).json(docs);
     }
   });
 });
@@ -82,7 +82,7 @@ app.get("/contacts/:id", function(req, res) {
     if (err) {
       handleError(res, err.message, "Failed to get contact");
     } else {
-      res.status(200).json(doc);  
+      res.status(200).json(doc);
     }
   });
 });
