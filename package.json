@@ -25,6 +25,8 @@
   "dependencies": {
     "body-parser": "^1.13.3",
     "express": "^4.13.3",
-    "mongodb": "^2.0.43"
+    "express-validator": "^3.0.0",
+    "mongodb": "^2.0.43",
+    "util": "^0.10.3"
   }
 }
