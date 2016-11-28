@@ -1,9 +1,7 @@
-var util = require("util");
 var express = require("express");
 var path = require("path");
 var bodyParser = require("body-parser");
 var mongodb = require("mongodb");
-expressValidator = require('express-validator');
 var ObjectID = mongodb.ObjectID;
 
 var CONTACTS_COLLECTION = "contacts";
@@ -11,7 +9,6 @@ var CONTACTS_COLLECTION = "contacts";
 var app = express();
 app.use(express.static(__dirname + "/public"));
 app.use(bodyParser.json());
-app.use(expressValidator());
 
 
 // Create a database variable outside of the database connection callback to reuse the connection pool in your app.
@@ -61,27 +58,14 @@ app.get("/contacts", function(req, res) {
 app.post("/contacts", function(req, res) {
   var newContact = req.body;
   newContact.createDate = new Date();
-
-   req.assert('email', 'Ingresa un correo válido').isEmail();
-   req.sanitize('email').toBoolean();
-
-   req.getValidationResult().then(function(result) {
-    if (!result.isEmpty()) {
-      res.send('There have been validation errors: ' + util.inspect(result.array()), 400);
-      return;
+  
+  db.collection(CONTACTS_COLLECTION).insertOne(newContact, function(err, doc) {
+    if (err) {
+      handleError(res, err.message, "Failed to create new contact.");
     } else {
-      db.collection(CONTACTS_COLLECTION).insertOne(newContact, function(err, doc) {
-        res.status(201).json(doc.ops[0]);
-      });
+      res.status(201).json(doc.ops[0]);
     }
-    res.json({
-      email: req.params.email
-    });
   });
-
-  /*if (!(req.body.firstName || req.body.lastName)) {
-    handleError(res, "Invalid user input", "Must provide a first or last name.", 400);
-  }*/
 });
 
 /*  "/contacts/:id"

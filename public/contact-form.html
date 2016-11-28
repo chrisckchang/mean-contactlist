@@ -3,31 +3,35 @@
       <h2>Crear nuevo contacto</h2>
   </div>
 </div>
-<div class="container">
+<form name="form" novalidate>
   <div>
     <p>
       <label>Nombre *</label>
-      <input id="name" class="form-control" type="text" ng-model="contact.firstName" required>
+      <input name="name" class="form-control" type="text" ng-model="contact.firstName" required>
+      <p class="text-danger" ng-hide="form.name.$valid">Escribe tu nombre por favor</p>
     </p>
     <p>
       <label>Apellido *</label>
-      <input id="name" class="form-control" type="text" ng-model="contact.lastName" required>
+      <input name="last_name" class="form-control" type="text" ng-model="contact.lastName" required>
+      <p class="text-danger" ng-hide="form.last_name.$valid">Escribe tu apellido por favor</p>
     </p>
     <p>
       <label>Correo electrónico *</label>
-      <input id="name" class="form-control" type="text" ng-model="contact.email" required>
+      <input name="email" class="form-control" type="email" ng-model="contact.email" required>
+      <p class="text-danger" ng-hide="form.email.$valid">Escribe un correo válido por favor</p>
     </p>
     <p>
       <label>Teléfono</label>
-      <input id="name" class="form-control" type="text" ng-model="contact.phone">
+      <input name="phone" class="form-control" type="tel" ng-model="contact.phone" >
+      <p class="text-danger" ng-hide="form.phone.$valid">Escribe tu nombre por favor</p>
     </p>
     <p>
       <label>Dirección</label>
-      <input id="name" class="form-control" type="text" ng-model="contact.address">
+      <input name="address" class="form-control" type="text" ng-model="contact.address">
     </p>
     <p>
-      <button style="margin-top:20px" class="btn btn-primary" ng-click="saveContact(contact)">Guardar</button>
+      <button style="margin-top:20px" class="btn btn-primary" ng-click="form.$valid && saveContact(contact)">Guardar</button>
       <button style="margin-top:20px" class="btn btn-default" ng-click="back()">Regresar</button>
     </p>
   </div>
-</div>
+</form>
