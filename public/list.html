@@ -14,16 +14,23 @@
   <div class="col-md-11">
     <table class="table table-hover">
       <thead>
-        <th>Contacto</th>
-        <th class="pull-right">Acciones</th>
+        <th>Nombre</th>
+        <th>Apellidos</th>
+        <th class="text-right">Acciones</th>
       </thead>
       <tbody>
         <tr ng-repeat="contact in contacts | orderBy:'lastName'" style="cursor:pointer">
           <td>
-            <a ng-href="#/contact/{{contact._id}}">{{ contact.firstName }} {{ contact.lastName }}</a>
+            {{ contact.firstName }}
           </td>
           <td>
-            <a href="#/"><button class="btn btn-danger btn-sm pull-right" ng-click="deleteContact(contact._id)">Eliminar</button></a>
+            {{ contact.lastName }}
+          </td>
+          <td>
+            <div class="pull-right">                               
+              <a ng-href="#/contact/{{contact._id}}" class="btn btn-primary btn-sm">Ver</a>
+              <button class="btn btn-danger btn-sm" ng-click="deleteContact(contact._id)">Eliminar</button> 
+            </div>            
           </td>
         </tr>
       </tbody>

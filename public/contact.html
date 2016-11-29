@@ -11,9 +11,9 @@
 </div>
 <div ng-hide="editMode" class="container">
   <div>
-    <p ng-if="contact.email">correo electrónico: <a ng-href="mailto:{{ contact.email }}" target="_blank">{{ contact.email }}</a></p>
-    <p ng-if="contact.phone">teléfono: {{ contact.phone }} </p>
-    <p ng-if="contact.address"> dirección: {{ contact.address }} </p>
+    <p ng-if="contact.email"><strong>Correo electrónico:</strong> <a ng-href="mailto:{{ contact.email }}" target="_blank">{{ contact.email }}</a></p>
+    <p ng-if="contact.phone"><strong>Teléfono:</strong> {{ contact.phone }}</p>
+    <p ng-if="contact.address"><strong>Dirección:</strong> {{ contact.address }}</p>
     <p>
       <button style="margin-top:20px" class="btn btn-primary" ng-click="toggleEdit()">Editar</button>
       <a style="margin-top:20px" class="btn btn-default" href="#/">Back</a>
